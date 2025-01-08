@@ -186,7 +186,7 @@ class LocalRAG:
                 7. Minimum response length should be several paragraphs
                 8. Include specific technical terminology with explanations
                 9. Reference related concepts to build a broader understanding
-                10. Give practical examples and applications of the concepts even if they are out of context
+                10. Give practical examples and applications of the concepts and provide code in python for them
 
                 If the context doesn't contain all needed information, explain what you can from the available context 
                 and clearly indicate what additional aspects would typically be relevant for a complete understanding.
