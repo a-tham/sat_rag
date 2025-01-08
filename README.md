@@ -40,9 +40,13 @@ cd sat_rag
 mkdir .streamlit
 echo 'COHERE_API_KEY = "your-cohere-api-key"' > .streamlit/secrets.toml
 ```
-
-3. Place your PDF documents in a directory (e.g., `pdf/`):
+Enter your Cohere API key in local_rag.py:
+```bash
+if __name__ == "__main__":
+    # Initialize the system
+    rag = LocalRAG(cohere_api_key="cohere-api-key")
 ```
+
 project/
 ├── pdf/
 │   ├── document1.pdf
