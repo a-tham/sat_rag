@@ -51,7 +51,7 @@ class LocalRAG:
             text += page.extract_text() + " "
         return text.strip()
 
-    def _chunk_text(self, text: str, chunk_size: int = 500, overlap: int = 50) -> List[str]:
+    def _chunk_text(self, text: str, chunk_size: int = 1000, overlap: int = 200) -> List[str]:
         """Split text into chunks with overlap."""
         words = text.split()
         chunks = []
@@ -160,7 +160,7 @@ class LocalRAG:
             search_results = self.qdrant.search(
                 collection_name=self.collection_name,
                 query_vector=query_embedding,
-                limit=5,  # Increase from 3 to 5 for more context
+                limit=8,  # Increase from 3 to 5 for more context
                 query_filter=search_filter
             )
             
@@ -170,31 +170,32 @@ class LocalRAG:
             # Prepare context from search results
             context = "\n\n".join([hit.payload["text"] for hit in search_results])
             
-            # Generate response using Command-R
+            # Generate response using Command-R+
             response = self.co.chat(
                 message=question,
-                model="command-r",
-                preamble="""You are an expert professor in satellite navigation, guidance, and control systems, 
-                with extensive experience in both teaching and practical applications. Your role is to:
+                model="command-r-plus-08-2024",
+                preamble = """You are an expert professor in satellite navigation, guidance, and control systems. 
+                When answering questions:
 
-                1. Explain concepts clearly and thoroughly, using technical terminology appropriately
-                2. Provide detailed explanations that connect theoretical principles to practical applications
-                3. Break down complex topics into understandable components
-                4. Include relevant examples or analogies when helpful
-                5. Address both theoretical foundations and practical implications
-                6. Highlight key relationships between different concepts
-                7. Point out common misconceptions or areas where students often get confused
-                8. Explain the significance of each concept in the broader context of satellite systems
+                1. Always start with a high-level overview of the concept
+                2. Give detailed, thorough explanations with examples
+                3. Use mathematical expressions when relevant
+                4. Break down complex ideas into digestible parts
+                5. ALWAYS aim for comprehensive, lecture-style responses
+                6. Explicitly connect concepts to real-world satellite applications
+                7. Minimum response length should be several paragraphs
+                8. Include specific technical terminology with explanations
+                9. Reference related concepts to build a broader understanding
+                10. Give practical examples and applications of the concepts even if they are out of context
 
-                Base your responses on the provided context. If the specific information isn't in the context, 
-                acknowledge this but explain what aspects you can address from the available information. 
-                If relevant, mention what additional information would be helpful for a more complete understanding.
+                If the context doesn't contain all needed information, explain what you can from the available context 
+                and clearly indicate what additional aspects would typically be relevant for a complete understanding.
 
-                Remember to maintain a clear, pedagogical approach, explaining concepts as if you're teaching 
-                a graduate-level course in satellite engineering.""",
+                Remember: Your goal is to provide lecture-quality, comprehensive explanations that a graduate student 
+                would find valuable. Never be brief - always expand and elaborate.""",
                 
                 documents=[{"text": context}],
-                temperature=0.7,
+                temperature=0.5,
                 # connectors=[{"id": "follow-up"}],
                 # suggest_follow_up_questions=True,
 
@@ -224,10 +225,11 @@ class LocalRAG:
         
         return list(sources)
 
+
 # Example usage
 if __name__ == "__main__":
     # Initialize the system
-    rag = LocalRAG(cohere_api_key="cohere-api-key")
+    rag = LocalRAG(cohere_api_key="24lN212hrjQAecMqJPfD01wirgAo0UZ7eGNQo2iB")
     
     # Process some PDFs
     pdf_directory = "pdf"
