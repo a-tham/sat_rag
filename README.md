@@ -47,6 +47,8 @@ if __name__ == "__main__":
     rag = LocalRAG(cohere_api_key="cohere-api-key")
 ```
 
+
+3. Place your PDF documents in a directory (e.g., pdf/):
 ```
 project/
 ├── pdf/
