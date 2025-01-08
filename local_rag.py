@@ -227,7 +227,7 @@ class LocalRAG:
 # Example usage
 if __name__ == "__main__":
     # Initialize the system
-    rag = LocalRAG(cohere_api_key="24lN212hrjQAecMqJPfD01wirgAo0UZ7eGNQo2iB")
+    rag = LocalRAG(cohere_api_key="cohere-api-key")
     
     # Process some PDFs
     pdf_directory = "pdf"

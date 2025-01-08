@@ -1,4 +1,6 @@
-   streamlit
-   cohere-core
-   qdrant-client
-   pypdf
+streamlit
+cohere-core
+qdrant-client
+pypdf
+typing
+uuid
