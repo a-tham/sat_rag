@@ -104,14 +104,14 @@ The system uses Qdrant for vector storage:
 
 ### Text Processing
 - Chunk size: 500 words
-- Chunk overlap: 50 words
+- Chunk overlap: 100 words
 - Minimum chunk size: 50 words
 - Batch processing: 96 chunks per batch
 
 ### Response Generation
 - Uses Cohere Command R+ model
-- Temperature: 0.7 (balanced between consistency and creativity)
-- Retrieves 5 most relevant chunks for context
+- Temperature: 0.5 (balanced between consistency and creativity)
+- Retrieves 8 most relevant chunks for context
 - Specialized prompting for educational responses
 
 ## Running Persistently
