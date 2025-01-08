@@ -31,8 +31,8 @@ pip install -r requirements.txt
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/local-rag-system.git
-cd local-rag-system
+git clone https://github.com/a-tham/sat_rag
+cd sat_rag
 ```
 
 2. Create a `.streamlit` directory and add your Cohere API key:
